@@ -25,7 +25,7 @@ get_workspace.az_resource_group <- function(x, name, ...) {
   )
 }
 
-#' List Machine Learning Workspaces
+#' List Machine-Learning Workspaces
 #'
 #' @param x Something to get a workspace from, typically a resource group.
 #' @param ... Extra parameters to pass.
@@ -35,12 +35,22 @@ list_workspaces <- function(x, ...) {
   UseMethod("list_workspaces")
 }
 
-#' List Machine Learning Workspaces
-#' @param x Resource group.
-#' @param ... Ignored parameters.
 #' @export
 list_workspaces.az_resource_group <- function(x, ...) {
-  x$list_resources(
-    filter = "resourceType eq 'Microsoft.MachineLearningServices/workspaces'"
-  )
+  list_resources_by_type(x, "Microsoft.MachineLearningServices/workspaces")
+}
+
+#' List Resources by Type
+#' @param x Resource group.
+#' @param resource_type Type of resource to list.
+#' @param ... Extra parameters passed to \code{list_resources} method of Azure
+#'   resource group.
+#' @export
+list_resources_by_type <- function(x, resource_type, ...) {
+  UseMethod("list_resources_by_type")
+}
+
+#' @export
+list_resources_by_type.az_resource_group <- function(x, resource_type, ...) {
+  x$list_resources(filter = sprintf("resourceType eq '%s'", resource_type), ...)
 }
