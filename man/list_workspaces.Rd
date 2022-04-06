@@ -2,7 +2,7 @@
 % Please edit documentation in R/az-resource-group.R
 \name{list_workspaces}
 \alias{list_workspaces}
-\title{List Machine Learning Workspaces}
+\title{List Machine-Learning Workspaces}
 \usage{
 list_workspaces(x, ...)
 }
@@ -12,5 +12,5 @@ list_workspaces(x, ...)
 \item{...}{Extra parameters to pass.}
 }
 \description{
-List Machine Learning Workspaces
+List Machine-Learning Workspaces
 }

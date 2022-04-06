@@ -11,7 +11,17 @@
 
 \item{name}{Name of workspace to access.}
 
-\item{...}{Ignored parameters.}
+\item{...}{
+  Arguments passed on to \code{\link[azuremlsdk:get_workspace]{azuremlsdk::get_workspace}}
+  \describe{
+    \item{\code{auth}}{The \code{ServicePrincipalAuthentication} or \code{InteractiveLoginAuthentication}
+object. For more details refer to https://aka.ms/aml-notebook-auth. If NULL,
+the default Azure CLI credentials will be used or the API will prompt for credentials.}
+    \item{\code{subscription_id}}{A string of the subscription ID to use. The parameter
+is required if the user has access to more than one subscription.}
+    \item{\code{resource_group}}{A string of the resource group to use. If \code{NULL} the
+method will search all resource groups in the subscription.}
+  }}
 }
 \description{
 Uses a resource group's subscription identifier and resource group name to
