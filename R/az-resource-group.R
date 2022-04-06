@@ -15,13 +15,13 @@ get_workspace <- function(x, ...) {
 #'
 #' @param x Resource group.
 #' @param name Name of workspace to access.
-#' @param ... Ignored parameters.
+#' @inheritDotParams azuremlsdk::get_workspace
 #'
 #' @export
 get_workspace.az_resource_group <- function(x, name, ...) {
   azuremlsdk::get_workspace(name,
     subscription_id = x$subscription,
-    resource_group = x$name
+    resource_group = x$name, ...
   )
 }
 
