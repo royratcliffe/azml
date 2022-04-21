@@ -1,13 +1,3 @@
-#' Get Workspace
-#'
-#' @param x Something to get a workspace from, typically a resource group.
-#' @param ... Extra parameters to pass.
-#'
-#' @export
-get_workspace <- function(x, ...) {
-  UseMethod("get_workspace")
-}
-
 #' Get Workspace from Resource Group
 #'
 #' Uses a resource group's subscription identifier and resource group name to
@@ -15,11 +5,22 @@ get_workspace <- function(x, ...) {
 #'
 #' @param x Resource group.
 #' @param name Name of workspace to access.
-#' @param ... Ignored parameters.
+#' @inheritDotParams azuremlsdk::get_workspace
 #'
 #' @export
 get_workspace.az_resource_group <- function(x, name, ...) {
   azuremlsdk::get_workspace(name,
-                            subscription_id = x$subscription,
-                            resource_group = x$name)
+    subscription_id = x$subscription,
+    resource_group = x$name, ...
+  )
+}
+
+#' @export
+list_workspaces.az_resource_group <- function(x, ...) {
+  list_resources_by_type(x, "Microsoft.MachineLearningServices/workspaces")
+}
+
+#' @export
+list_resources_by_type.az_resource_group <- function(x, resource_type, ...) {
+  x$list_resources(filter = sprintf("resourceType eq '%s'", resource_type), ...)
 }
